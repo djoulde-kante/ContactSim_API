@@ -12,6 +12,9 @@ const contactRoutes = require('./routes/routeContact');
 
 const app = express();
 
+// Middleware pour parser le corps JSON
+app.use(express.json());
+
 
 
 

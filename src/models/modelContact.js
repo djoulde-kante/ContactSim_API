@@ -17,5 +17,7 @@ const contactSchema = sequelize.define('modelContact', {
     allowNull: false,
     required:true
   },
-})
+}, {
+  timestamps: false
+});
 module.exports = contactSchema;
