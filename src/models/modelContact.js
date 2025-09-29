@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
-const modelContact = sequelize.define('modelContact', {
+const contactSchema = sequelize.define('modelContact', {
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
@@ -17,5 +17,7 @@ const modelContact = sequelize.define('modelContact', {
     allowNull: false,
     required:true
   },
-})
+}, {
+  timestamps: false
+});
 module.exports = contactSchema;

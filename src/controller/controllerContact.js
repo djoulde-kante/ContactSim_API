@@ -1,4 +1,4 @@
-const modelContact = require('../model/modelContact');
+const modelContact = require('../models/modelContact');
 
 //  méthode pour enregistrer un nouveau contact
 exports.enregistrerContact = async (req, res)=>{
@@ -20,24 +20,37 @@ exports.enregistrerContact = async (req, res)=>{
     // méthode pour récuperer tous les contacts
     exports.listerContacts = async (req, res)=>{
         try{
-            const contacts = await modelContact.find();
+            const contacts = await modelContact.findAll();
             res.status(200).json(contacts);
         }catch(error){
             res.status(400).json({message:error.message});
         };}
+
+    // méthode pour récupérer un seul contact par son id
+    exports.listerContact = async (req, res) => {
+        const { id } = req.params;
+        try {
+            const contact = await modelContact.findByPk(id);
+            if (!contact) {
+                return res.status(404).json({ message: "Contact non trouvé" });
+            }
+            res.status(200).json(contact);
+        } catch (error) {
+            res.status(400).json({ message: error.message });
+        }
+    };
 
 // méthode pour modifier un contact
 exports.modifierContact = async (req, res)=>{
     const {id} = req.params;
     const {nom,telephone} = req.body;
     try{
-        const contact = await modelContact.findByIdAndUpdate(id, {nom,telephone}, {new:true});
-        //res.status(200).json(contact);
-        if(!contact){
+        const [updatedRows] = await modelContact.update({ nom, telephone }, { where: { id } });
+        if(updatedRows === 0){
             return res.status(404).json({message:"Contact non trouvé"});
         }
-        res.status(200).json({message:"Contact modifié avec succès"});    
-        
+        const contact = await modelContact.findByPk(id);
+        res.status(200).json({message:"Contact modifié avec succès", contact});
     }catch(error){
         res.status(400).json({message:error.message});
     };}
