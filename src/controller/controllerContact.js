@@ -1,4 +1,4 @@
-const modelContact = require('../model/modelContact');
+const modelContact = require('../models/modelContact');
 
 //  méthode pour enregistrer un nouveau contact
 exports.enregistrerContact = async (req, res)=>{

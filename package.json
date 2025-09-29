@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -18,7 +19,14 @@
   },
   "homepage": "https://github.com/djoulde-kante/ContactSim_API#readme",
   "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
     "express": "^5.1.0",
-    "nodemon": "^3.1.10"
+    "express-rate-limit": "^8.1.0",
+    "helmet": "^8.1.0",
+    "morgan": "^1.10.1",
+    "nodemon": "^3.1.10",
+    "pg": "^8.16.3",
+    "sequelize": "^6.37.7"
   }
 }

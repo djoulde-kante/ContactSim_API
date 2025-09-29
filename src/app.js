@@ -8,7 +8,7 @@ require('dotenv').config();
 const sequelize = require('./config/database');
 
 // Import des routes
-const contactRoutes = require('./routes/contactRoutes');
+const contactRoutes = require('./routes/routeContact');
 
 const app = express();
 
@@ -27,7 +27,14 @@ app.get('/health', (req, res) => {
 });
 
 // Middleware de gestion des erreurs
-app.use(errorHandler);
+// Middleware de gestion des erreurs
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(err.status || 500).json({
+    error: err.message || 'Erreur interne du serveur',
+    details: err.details || null
+  });
+});
 
 // Gestion des routes non trouvées
 app.use((req, res) => {
