@@ -59,11 +59,12 @@ exports.modifierContact = async (req, res)=>{
 exports.supprimerContact = async (req, res)=>{
     const {id} = req.params;
     try{
-        const contact = await modelContact.findByIdAndDelete(id);
-        if(!contact){
+        const deletedRows = await modelContact.destroy({ where: { id } });
+        if(deletedRows === 0){
             return res.status(404).json({message:"Contact non trouvé"});
         }
         res.status(200).json({message:"Contact supprimé"});
     }catch(error){
         res.status(400).json({message:error.message});
-    };}       
+    };
+}
