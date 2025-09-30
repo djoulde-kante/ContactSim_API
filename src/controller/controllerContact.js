@@ -12,7 +12,7 @@ exports.enregistrerContact = async (req, res)=>{
     try{
         const contact = new modelContact({nom,telephone});
         await contact.save();
-        res.status(201).json(contact);
+        res.status(200).json(contact);
     }catch(error){
         res.status(400).json({message:error.message});
     };}
