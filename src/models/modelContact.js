@@ -15,7 +15,8 @@ const contactSchema = sequelize.define('modelContact', {
    telephone: {
     type: DataTypes.STRING(12),
     allowNull: false,
-    required:true
+    required:true,
+    unique: true
   },
 }, {
   timestamps: false
